@@ -1,12 +1,13 @@
 const host = 'http://140.112.91.60:23132/';
 
+import { v4 as uuidv4 } from 'uuid';
+import model from './diagramflow.js';
+
 window.$ = window.jQuery = require('jquery');
 require('popper.js');
 require('bootstrap');
 let dagre = require('dagre');
-let uuid = require("uuid");
 let Plotly = require('plotly.js/lib/core');
-import model from './diagramflow.js';
 
 let global = {
     'trainingPid': -1,
@@ -608,7 +609,7 @@ let parseCfg = (cfg) => {
 };
 
 let createFolder = () => {
-    global.folderId = uuid.v4();
+    global.folderId = uuidv4();
     const xhr = new XMLHttpRequest();
     const url = host + 'create/' + global.folderId;
     xhr.open("POST", url);

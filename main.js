@@ -1,17 +1,23 @@
+const path = require('node:path')
 const { app, BrowserWindow } = require('electron')
 
 function createWindow () {
-  // Create the browser window.
-  let win = new BrowserWindow({
+  const win = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true
+      contextIsolation: true,
+      nodeIntegration: false,
+      sandbox: true
     }
   })
 
-  // and load the index.html of the app.
-  win.loadFile('index.html')
+  win.webContents.setWindowOpenHandler(() => ({ action: 'deny' }))
+  win.webContents.on('will-navigate', (event) => {
+    event.preventDefault()
+  })
+
+  win.loadFile(path.join(__dirname, 'index.html'))
 }
 
 app.whenReady().then(createWindow)

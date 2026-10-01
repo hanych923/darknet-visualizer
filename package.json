@@ -4,7 +4,8 @@
   "description": "visualizer for darkent model",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "build": "esbuild dashboard.js --bundle --platform=browser --format=iife --outfile=dist/dashboard.js",
+    "start": "npm run build && electron ."
   },
   "repository": {
     "type": "git",
@@ -19,10 +20,16 @@
   "dependencies": {
     "bootstrap": "^4.4.1",
     "dagre": "^0.8.5",
-    "electron": "^8.2.3",
     "jquery": "^3.5.0",
-    "plotly.js": "^1.47.4",
+    "plotly.js": "^4.1.1",
     "popper.js": "^1.16.1",
-    "uuid": "^8.0.0"
+    "uuid": "^14.0.2"
+  },
+  "devDependencies": {
+    "electron": "^44.5.1",
+    "esbuild": "^0.28.2"
+  },
+  "engines": {
+    "node": ">=22.12.0"
   }
 }
